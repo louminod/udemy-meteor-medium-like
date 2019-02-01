@@ -3,7 +3,19 @@
 </template>
 
 <template name="article_create_form">
-    <h3>Formulaire de création d'un article</h3>
+    <div class="card my-2">
+        <h5 class="card-header">Publier un article</h5>
+        <div class="card-body">
+            <form class="js-create-article">
+                <input type="text" class="form-control mb-2" placeholder="Titre" name="title">
+                <textarea name="content" rows="20" class="form-control mb-2" placeholder="Contenu de l'article"></textarea>
+                <div class="my-1 text-right">
+                    <button type="button" class="btn btn-outline-secondary">Annuler</button>
+                    <button type="submit" class="btn btn-success">Publier</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
 
 <template name="article_edit_form">
