@@ -25,3 +25,6 @@ peppelg:bootstrap-3-modal
 
 accounts-password
 useraccounts:bootstrap
+
+ostrio:flow-router-extra
+kadira:blaze-layout
