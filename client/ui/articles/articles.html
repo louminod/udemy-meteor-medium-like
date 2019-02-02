@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="text-center">
                 <h2 class="card-title">{{article.title}}</h2>
-                <h6 class="card-subtitle text-muted mb-2">Publié le {{article.createdAt}} par {{article.ownerId}}</h6>
+                <h6 class="card-subtitle text-muted mb-2">Publié le {{ getDisplayDateTime article.createdAt}} par {{ getUserFullName article.ownerId}}</h6>
                 <p class="card-text text-left" style="white-space: pre-line;">{{article.content}}</p>
             </div>
         </div>
@@ -42,7 +42,7 @@
     <div class="card mb-2 my-4">
         <div class="card-body">
             <h5 class="card-title"><a href="/article/{{article._id}}">{{article.title}}</a></h5>
-            <p class="card-subtitle text-muted">Publié le {{article.createdAt}} par {{article.ownerId}}</p>
+            <p class="card-subtitle text-muted">Publié le {{ getDisplayDateTime article.createdAt}} par {{ getUserFullName article.ownerId}}</p>
         </div>
     </div>
 </template>
