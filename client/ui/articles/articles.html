@@ -23,5 +23,14 @@
 </template>
 
 <template name="article_list">
-    <h3>Liste des articles</h3>
+    {{#each article in articles}}
+        <div class="card mb-2 my-4">
+            <div class="card-body">
+                <h5 class="card-title">{{article.title}}</h5>
+                <p class="card-subtitle text-muted">Publié le {{article.createdAt}} par {{article.ownerId}}</p>
+            </div>
+        </div>
+    {{else}}
+        <h4 class="text-center text-muted">Aucun article à afficher</h4>
+    {{/each}}
 </template>

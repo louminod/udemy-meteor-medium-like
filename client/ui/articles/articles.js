@@ -24,3 +24,9 @@ Template.article_create_form.events({
         event.target.content.value = '';
     }
 });
+
+Template.article_list.helpers({
+    articles() {
+        return Articles.find().fetch();
+    }
+});
