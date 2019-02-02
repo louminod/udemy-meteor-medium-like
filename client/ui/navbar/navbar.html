@@ -1,8 +1,8 @@
 <template name="navbar">
     <nav class="navbar navbar-light bg-light">
         <div class="container">
-            <a href="/" class="navbar-brand mr-auto">Meteor Medium</a>
-            <button class="btn btn-outlline-secondary mr-auto js-goto-create-article">Publier un article</button>
+            <a href="/" class="navbar-brand">Meteor Medium</a>
+            <button class="btn btn-outline-secondary mr-auto js-goto-create-article">Publier un article</button>
             {{#unless loggingIn}}
                 {{#if currentUser}}
                     <span class="navbar-text mr-2">

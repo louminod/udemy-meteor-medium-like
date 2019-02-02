@@ -1,4 +1,5 @@
 import { Articles } from '../../../both';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import './articles.html';
 
@@ -28,5 +29,11 @@ Template.article_create_form.events({
 Template.article_list.helpers({
     articles() {
         return Articles.find().fetch();
+    }
+});
+
+Template.article_page.helpers({
+    article() {
+        return Articles.findOne({ _id: FlowRouter.getParam('articleId') });
     }
 });
