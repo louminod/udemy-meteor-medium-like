@@ -3,7 +3,9 @@
         <div class="card-body">
             <div class="text-center">
                 <h2 class="card-title">{{article.title}}</h2>
-                <h6 class="card-subtitle text-muted mb-2">Publié le {{ getDisplayDateTime article.createdAt}} par {{ getUserFullName article.ownerId}}</h6>
+                <h6 class="card-subtitle text-muted mb-2">Publié le {{ getDisplayDateTime article.createdAt}} par {{
+                    getUserFullName article.ownerId}}</h6>
+                <a href="/article/{{article._id}}/edit" class="btn btn-primary btm-sm mb-3">Modifier</a>
                 <p class="card-text text-left" style="white-space: pre-line;">{{article.content}}</p>
             </div>
         </div>
@@ -27,14 +29,26 @@
 </template>
 
 <template name="article_edit_form">
-    <h3>Formulaire d'édition d'un article</h3>
+    <div class="card my-2">
+        <h5 class="card-header">Modifer un article</h5>
+        <div class="card-body">
+            <form class="js-edit-article">
+                <input type="text" class="form-control mb-2" placeholder="Titre" name="title" value="{{article.title}}">
+                <textarea name="content" rows="20" class="form-control mb-2" placeholder="Contenu de l'article">{{article.content}}</textarea>
+                <div class="my-1 text-right">
+                    <a href="/article/{{article._id}}" class="btn btn-outline-secondary">Annuler</a>
+                    <button type="submit" class="btn btn-success">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
 
 <template name="article_list">
     {{#each article in articles}}
-        {{> article_single article=article}}
+    {{> article_single article=article}}
     {{else}}
-        <h4 class="text-center text-muted">Aucun article à afficher</h4>
+    <h4 class="text-center text-muted">Aucun article à afficher</h4>
     {{/each}}
 </template>
 
@@ -42,7 +56,8 @@
     <div class="card mb-2 my-4">
         <div class="card-body">
             <h5 class="card-title"><a href="/article/{{article._id}}">{{article.title}}</a></h5>
-            <p class="card-subtitle text-muted">Publié le {{ getDisplayDateTime article.createdAt}} par {{ getUserFullName article.ownerId}}</p>
+            <p class="card-subtitle text-muted">Publié le {{ getDisplayDateTime article.createdAt}} par {{
+                getUserFullName article.ownerId}}</p>
         </div>
     </div>
 </template>

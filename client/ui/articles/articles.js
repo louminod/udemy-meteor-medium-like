@@ -37,3 +37,22 @@ Template.article_page.helpers({
         return Articles.findOne({ _id: FlowRouter.getParam('articleId') });
     }
 });
+
+Template.article_edit_form.helpers({
+    article() {
+        return Articles.findOne({ _id: FlowRouter.getParam('articleId') });
+    }
+});
+
+Template.article_edit_form.events({
+    'submit .js-edit-article'(event, instance) {
+        event.preventDefault();
+
+        const title = event.target.title.value;
+        const content = event.target.content.value;
+
+        Articles.update({ _id: FlowRouter.getParam('articleId') }, { $set: { title: title, content: content } });
+
+        FlowRouter.go('/article/:articleId', { articleId: FlowRouter.getParam('articleId') });
+    }
+});
