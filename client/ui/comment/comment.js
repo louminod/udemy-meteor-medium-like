@@ -23,6 +23,6 @@ Template.comment_form.events({
 
 Template.comment_list.helpers({
     comments() {
-        return Comments.find({ articleId: FlowRouter.getParam('articleId') });
+        return Comments.find({ articleId: FlowRouter.getParam('articleId') }, { sort: { createdAt: 1 } });
     }
 })
