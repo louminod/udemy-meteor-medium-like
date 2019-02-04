@@ -8,14 +8,7 @@ Template.comment_form.events({
 
         const content = event.target.content.value;
 
-        let commentDoc = {
-            content: content,
-            articleId: FlowRouter.getParam('articleId'),
-            createdAt: new Date(),
-            ownerId: Meteor.userId()
-        }
-
-        Comments.insert(commentDoc);
+        Meteor.call('insertComment', { content: content, articleId: FlowRouter.getParam('articleId') })
 
         event.target.content.value = '';
     }
