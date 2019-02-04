@@ -36,6 +36,7 @@
                 <input type="text" class="form-control mb-2" placeholder="Titre" name="title" value="{{article.title}}">
                 <textarea name="content" rows="20" class="form-control mb-2" placeholder="Contenu de l'article">{{article.content}}</textarea>
                 <div class="my-1 text-right">
+                    <button type="button" class="btn tbn-danger float-left js-delete-article">Supprimer</button>
                     <a href="/article/{{article._id}}" class="btn btn-outline-secondary">Annuler</a>
                     <button type="submit" class="btn btn-success">Modifier</button>
                 </div>

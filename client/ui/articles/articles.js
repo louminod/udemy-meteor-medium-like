@@ -54,5 +54,10 @@ Template.article_edit_form.events({
         Articles.update({ _id: FlowRouter.getParam('articleId') }, { $set: { title: title, content: content } });
 
         FlowRouter.go('/article/:articleId', { articleId: FlowRouter.getParam('articleId') });
+    },
+    'click .js-delete-article'(event, instance) {
+        Articles.remove({ _id: FlowRouter.getParam('articleId') });
+
+        FlowRouter.go('/');
     }
 });
