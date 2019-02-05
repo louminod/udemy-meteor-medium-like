@@ -6,6 +6,11 @@ Template.comment_form.events({
     'submit .js-create-comment'(event, instance) {
         event.preventDefault();
 
+        if(!Meteor.userId()) {
+            Modal.show('login_modal');
+            return;
+        }
+
         const content = event.target.content.value;
 
         Meteor.call('insertComment', { content: content, articleId: FlowRouter.getParam('articleId') }, function (err, res) {
