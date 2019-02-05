@@ -2,6 +2,7 @@ accounts-base@1.4.3
 accounts-password@1.5.1
 alexwine:bootstrap-4@4.1.0
 allow-deny@1.1.0
+audit-argument-checks@1.0.7
 autopublish@1.0.7
 autoupdate@1.5.0
 babel-compiler@7.2.4
