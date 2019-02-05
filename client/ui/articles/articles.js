@@ -10,10 +10,14 @@ Template.article_create_form.events({
         const title = event.target.title.value;
         const content = event.target.content.value;
 
-        Meteor.call('insertArticle', { title: title, content: content });
+        Meteor.call('insertArticle', { title: title, content: content }, function (err, res) {
+            if (!err) {
+                event.target.title.value = '';
+                event.target.content.value = '';
 
-        event.target.title.value = '';
-        event.target.content.value = '';
+                FlowRouter.go('/article/:articleId', { articleId: res })
+            }
+        });
     }
 });
 
@@ -47,7 +51,7 @@ Template.article_edit_form.events({
         });
     },
     'click .js-delete-article'(event, instance) {
-        Meteor.call('removeArticle', FlowRouter.getParam('articleId'), , function (err, res) {
+        Meteor.call('removeArticle', FlowRouter.getParam('articleId'), function (err, res) {
             if (!err) FlowRouter.go('/');
         });
     }

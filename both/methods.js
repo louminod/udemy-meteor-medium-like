@@ -11,7 +11,7 @@ Meteor.methods({
             ownerId: this.userId
         };
 
-        Articles.insert(articleDoc);
+        return Articles.insert(articleDoc);
     },
     updateArticle(articleId, article) {
         Articles.update({ _id: articleId }, { $set: { title: article.title, content: article.content } });
