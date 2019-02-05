@@ -46,7 +46,7 @@ Template.article_edit_form.events({
         const title = event.target.title.value;
         const content = event.target.content.value;
 
-        Meteor.call('updateArticle', FlowRouter.getParam('articleId'), { title: title, content: content }, function (err, res) {
+        Meteor.call('updateArticle', { id: FlowRouter.getParam('articleId'), title: title, content: content }, function (err, res) {
             if (!err) FlowRouter.go('/article/:articleId', { articleId: FlowRouter.getParam('articleId') });
         });
     },

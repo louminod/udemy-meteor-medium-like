@@ -1,14 +1,11 @@
-import { Articles, Comments } from './collections';
+import { Articles, Comments, articleUpsertSchema, commentInsertSchema } from './collections';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 Meteor.methods({
     insertArticle(article) {
-        check(article, {
-            title: String,
-            content: String
-        });
+        articleUpsertSchema.validate(article);
 
         let articleDoc = {
             title: article.title,
@@ -19,14 +16,10 @@ Meteor.methods({
 
         return Articles.insert(articleDoc);
     },
-    updateArticle(articleId, article) {
-        check(articleId, String);
-        check(article, {
-            title: String,
-            content: String
-        });
+    updateArticle(article) {
+        articleUpsertSchema.validate(article);
 
-        Articles.update({ _id: articleId }, { $set: { title: article.title, content: article.content } });
+        Articles.update({ _id: article.id }, { $set: { title: article.title, content: article.content } });
     },
     removeArticle(articleId) {
         check(articleId, String);
@@ -34,10 +27,7 @@ Meteor.methods({
         Articles.remove({ _id: articleId });
     },
     insertComment(comment) {
-        check(comment, {
-            articleId: String,
-            content: String
-        })
+        commentInsertSchema.validate(comment);
 
         let commentDoc = {
             content: comment.content,
