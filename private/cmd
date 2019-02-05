@@ -1,0 +1,3 @@
+meteor npm install bcrypt@3.0.2 --save
+meteor npm install moment --save
+npm install --save simpl-schema
