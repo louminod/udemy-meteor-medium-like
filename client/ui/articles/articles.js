@@ -42,13 +42,13 @@ Template.article_edit_form.events({
         const title = event.target.title.value;
         const content = event.target.content.value;
 
-        Meteor.call('updateArticle', FlowRouter.getParam('articleId'), { title: title, content: content });
-
-        FlowRouter.go('/article/:articleId', { articleId: FlowRouter.getParam('articleId') });
+        Meteor.call('updateArticle', FlowRouter.getParam('articleId'), { title: title, content: content }, function (err, res) {
+            if (!err) FlowRouter.go('/article/:articleId', { articleId: FlowRouter.getParam('articleId') });
+        });
     },
     'click .js-delete-article'(event, instance) {
-        Meteor.call('removeArticle', FlowRouter.getParam('articleId'));
-
-        FlowRouter.go('/');
+        Meteor.call('removeArticle', FlowRouter.getParam('articleId'), , function (err, res) {
+            if (!err) FlowRouter.go('/');
+        });
     }
 });

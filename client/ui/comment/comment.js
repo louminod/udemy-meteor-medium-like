@@ -8,9 +8,9 @@ Template.comment_form.events({
 
         const content = event.target.content.value;
 
-        Meteor.call('insertComment', { content: content, articleId: FlowRouter.getParam('articleId') })
-
-        event.target.content.value = '';
+        Meteor.call('insertComment', { content: content, articleId: FlowRouter.getParam('articleId') }, function (err, res) {
+            if (!err) event.target.content.value = '';
+        });
     }
 });
 
