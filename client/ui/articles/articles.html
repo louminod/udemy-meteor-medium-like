@@ -3,9 +3,10 @@
         <div class="card-body">
             <div class="text-center">
                 <h2 class="card-title">{{article.title}}</h2>
-                <h6 class="card-subtitle text-muted mb-2">Publié le {{ getDisplayDateTime article.createdAt}} par {{
-                    getUserFullName article.ownerId}}</h6>
-                <a href="/article/{{article._id}}/edit" class="btn btn-primary btm-sm mb-3">Modifier</a>
+                <h6 class="card-subtitle text-muted mb-2">Publié le {{ getDisplayDateTime article.createdAt}} par {{getUserFullName article.ownerId}}</h6>
+                {{#if equals article.ownerId currentUser._id}}
+                    <a href="/article/{{article._id}}/edit" class="btn btn-primary btm-sm mb-3">Modifier</a>
+                {{/if}}
                 <p class="card-text text-left" style="white-space: pre-line;">{{article.content}}</p>
             </div>
         </div>
@@ -24,7 +25,7 @@
                 <input type="text" class="form-control mb-2" placeholder="Titre" name="title">
                 <textarea name="content" rows="20" class="form-control mb-2" placeholder="Contenu de l'article"></textarea>
                 <div class="my-1 text-right">
-                    <button type="button" class="btn btn-outline-secondary">Annuler</button>
+                    <a href="/" class="btn btn-outline-secondary">Annuler</a>
                     <button type="submit" class="btn btn-success">Publier</button>
                 </div>
             </form>

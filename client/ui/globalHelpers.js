@@ -10,3 +10,7 @@ Template.registerHelper('getUserFullName', function (userId) {
         return user.profile.fullname;
     }
 });
+
+Template.registerHelper('equals', function (a, b) {
+    return a == b;
+});
