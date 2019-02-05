@@ -7,7 +7,7 @@ Meteor.methods({
     insertArticle(article) {
         articleUpsertSchema.validate(article);
 
-        if(!this.userId) {
+        if (!this.userId) {
             throw new Meteor.Error('not-connected');
         }
 
@@ -23,8 +23,13 @@ Meteor.methods({
     updateArticle(article) {
         articleUpsertSchema.validate(article);
 
-        if(!this.userId) {
+        if (!this.userId) {
             throw new Meteor.Error('not-connected');
+        }
+
+        let articleFound = Articles.findOne({ _id: article.id });
+        if (articleFound.ownerId !== this.userId) {
+            throw new Meteor.Error('unauthorized', 'L\'utilisateur doit êter l\'auteur de l\'article');
         }
 
         Articles.update({ _id: article.id }, { $set: { title: article.title, content: article.content } });
@@ -32,8 +37,13 @@ Meteor.methods({
     removeArticle(articleId) {
         check(articleId, String);
 
-        if(!this.userId) {
+        if (!this.userId) {
             throw new Meteor.Error('not-connected');
+        }
+
+        let articleFound = Articles.findOne({ _id: articleId });
+        if (articleFound.ownerId !== this.userId) {
+            throw new Meteor.Error('unauthorized', 'L\'utilisateur doit êter l\'auteur de l\'article');
         }
 
         Articles.remove({ _id: articleId });
@@ -41,7 +51,7 @@ Meteor.methods({
     insertComment(comment) {
         commentInsertSchema.validate(comment);
 
-        if(!this.userId) {
+        if (!this.userId) {
             throw new Meteor.Error('not-connected');
         }
 
