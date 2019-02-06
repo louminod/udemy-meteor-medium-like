@@ -21,10 +21,18 @@ Template.article_create_form.events({
     }
 });
 
+Template.article_list.onCreated(function () {
+    this.subscribe('articles.list');
+});
+
 Template.article_list.helpers({
     articles() {
         return Articles.find({}, { sort: { createdAt: -1 } }).fetch();
     }
+});
+
+Template.article_page.onCreated(function () {
+    this.subscribe('article.single', FlowRouter.getParam('articleId'));
 });
 
 Template.article_page.helpers({
