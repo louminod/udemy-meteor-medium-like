@@ -3,6 +3,8 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import './articles.html';
 
+const NB_ARTICLE_IN_PAGE = 5;
+
 Template.article_create_form.events({
     'submit .js-create-article'(event, instance) {
         event.preventDefault();
@@ -22,12 +24,32 @@ Template.article_create_form.events({
 });
 
 Template.article_list.onCreated(function () {
-    this.subscribe('articles.list');
+    this.autorun(() => {
+        // Le + convertit en nombre
+    let currentPage = +FlowRouter.getParam('page') || 1;
+    let skip = (currentPage - 1) * NB_ARTICLE_IN_PAGE;
+
+    this.subscribe('articles.list', skip, NB_ARTICLE_IN_PAGE);
+    });
 });
 
 Template.article_list.helpers({
     articles() {
         return Articles.find({}, { sort: { createdAt: -1 } }).fetch();
+    },
+    pages() {
+        let articlesCount = Counts.get('articlesCount');
+        let pagesCount = Math.ceil(articlesCount / NB_ARTICLE_IN_PAGE);
+
+        // Le + convertit en nombre
+        let currentPage = +FlowRouter.getParam('page') || 1;
+
+        let pages = [];
+        for (let i = 1; i < pagesCount; i++) {
+            pages.push({ index: i, active: i === currentPage });
+        }
+
+        return pages;
     }
 });
 

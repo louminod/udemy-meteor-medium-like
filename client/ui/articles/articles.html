@@ -52,10 +52,19 @@
 
 <template name="article_list">
     {{#each article in articles}}
-    {{> article_single article=article}}
+        {{> article_single article=article}}
     {{else}}
-    <h4 class="text-center text-muted">Aucun article à afficher</h4>
+        <h4 class="text-center text-muted">Aucun article à afficher</h4>
     {{/each}}
+    <nav>
+        <ul class="pagination">
+            {{#each page in pages}}
+                <li class="page-item {{#if page.active}}active{{/if}}">
+                    <a href="/page/{{page.index}}" class="page-link">{{page.index}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    </nav>
 </template>
 
 <template name="article_single">

@@ -7,6 +7,12 @@ FlowRouter.route('/', {
     }
 });
 
+FlowRouter.route('/page/:page', {
+    action() {
+        BlazeLayout.render('layout', { main: 'home' });
+    }
+})
+
 FlowRouter.route('/article/create', {
     action() {
         BlazeLayout.render('layout', { main: 'article_create_form' });

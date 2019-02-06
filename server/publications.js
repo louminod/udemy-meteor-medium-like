@@ -1,15 +1,20 @@
 import { Articles, Comments } from '../both';
 import { check } from 'meteor/check';
 
-Meteor.publish('articles.list', function () {
+Meteor.publish('articles.list', function (skip, limit) {
+    check(skip, Number);
+    check(limit, Number);
 
-    let articleCursor = Articles.find({}, { fields: { content: 0 } });
+    let articleCursor = Articles.find({}, { fields: { content: 0 }, sort: { createdAt: -1 }, skip: skip, limit: limit });
 
     // Récupération des id des auteurs des articles
     let arrayArticle = articleCursor.fetch();
 
     let arrayOwnerId = arrayArticle.map(article => article.ownerId); // ["id1", "id2", "id1"]
     let arrayUniqueOwnerId = Array.from(new Set(arrayOwnerId)); // ["id1", "id2"]
+
+    // Permet de publier le 'count' d'articles
+    Counts.publish(this, 'articlesCount', Articles.find({}));
 
     return [
         articleCursor,
